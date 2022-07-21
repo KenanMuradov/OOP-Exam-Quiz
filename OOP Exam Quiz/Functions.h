@@ -1,12 +1,11 @@
 #pragma once
 
-bool quizCursor(Quiz& q)
+bool quizCursor(Quiz& q, int& button)
 {
 
 	vector<Question*> temp = q.questions();
 	short& answerIndex = temp[q.questionIndex]->answerIndex;
 
-	int button = _getch();
 	if (button == 224)
 	{
 		button = _getch();
@@ -45,6 +44,7 @@ bool quizCursor(Quiz& q)
 	else if (button == 13)
 	{
 		system("cls");
+		q.questions()[q.questionIndex]->currentAnswer() = temp[q.questionIndex]->answers()[answerIndex];
 		return true;
 	}
 
@@ -165,7 +165,7 @@ Quiz* createQuiz(string creatorNick)
 					tempQuestion = new Question(question);
 
 				}
-				catch (const std::exception& ex) 
+				catch (const std::exception& ex)
 				{
 					cout << ex.what() << endl;
 					system("pause");
@@ -187,7 +187,7 @@ Quiz* createQuiz(string creatorNick)
 						case 0:
 							cout << "Enter Answer Text: ";
 							getline(cin, answer);
-
+							system("cls");
 							while (true)
 							{
 								setCursorPosition(0, 0);
@@ -224,7 +224,6 @@ Quiz* createQuiz(string creatorNick)
 
 				}
 
-
 				if (tempQuestion != nullptr)
 					tempQuiz->addQuestion(tempQuestion);
 
@@ -243,8 +242,8 @@ Quiz* createQuiz(string creatorNick)
 		}
 	}
 
-	if (tempQuiz->questions().size() < 5)
-		throw exception("At least 5 answers needed");
+	if (tempQuiz->questions().size() < 1)
+		throw exception("At least 5 Questions needed");
 
 	return tempQuiz;
 }
@@ -276,7 +275,7 @@ double findScore(Quiz* quiz)
 	return finalPoint;
 }
 
-bool checkNickname(vector<Player*> players, const string& nick)
+bool checkNickname(vector<Player*> players, vector<Admin*> admins, const string& nick)
 {
 	for (auto& player : players)
 	{
@@ -284,11 +283,6 @@ bool checkNickname(vector<Player*> players, const string& nick)
 			return true;
 	}
 
-	return false;
-}
-
-bool checkNickname(vector<Admin*> admins, const string& nick)
-{
 	for (auto& admin : admins)
 	{
 		if (admin->nickname() == nick)
@@ -297,6 +291,7 @@ bool checkNickname(vector<Admin*> admins, const string& nick)
 
 	return false;
 }
+
 
 
 Player* findPlayer(vector<Player*> players, const string& nick, const string& pass)
@@ -319,4 +314,74 @@ Admin* findAdmin(vector<Admin*> admins, const string& nick, const string& pass)
 	}
 
 	return nullptr;
+}
+
+void seeAllPlayersResults(vector<Admin*> admins, vector<Player*> players)
+{
+	for (auto& admin : admins)
+	{
+		cout << "\n---------------\n";
+		cout << *admin << endl;
+		cout << "---------------\n";
+
+	}
+
+	for (auto& player : players)
+	{
+		cout << "\n---------------\n";
+		cout << *player << endl;
+		cout << "---------------\n";
+
+	}
+}
+
+void showQuizChoices(Commands& quizNames, vector<Quiz*> quizes)
+{
+	for (auto& quiz : quizes)
+		quizNames.commands.push_back(quiz->name());
+}
+
+Quiz* findQuiz(vector<Quiz*> quizes, string quizName)
+{
+	for (auto& quiz : quizes)
+	{
+		if (quiz->name() == quizName)
+			return new Quiz(*quiz);
+	}
+
+	return nullptr;
+}
+
+Quiz* playQuiz(Quiz*& quiz)
+{
+	bool submit = false;
+	bool choice = false;
+
+	int button;
+
+	while (!submit)
+	{
+		cout << *quiz->questions()[quiz->questionIndex];
+
+		cout << "\nPress space to submit";
+		button = _getch();
+		choice = quizCursor(*quiz, button);
+
+		if (choice)
+		{
+			quiz->questionPlacement(quiz->questions()[quiz->questionIndex]);
+			continue;
+		}
+
+		if (button == 32)
+			submit = true;
+	}
+	for (auto& question : quiz->questions())
+	{
+		if (question->currentAnswer() == nullptr)
+			quiz->unanswereds().push_back(question);
+	}
+
+	
+	return quiz;
 }

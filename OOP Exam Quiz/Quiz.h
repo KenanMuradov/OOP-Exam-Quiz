@@ -30,6 +30,9 @@ public:
 
 	void addQuestion(Question* q);
 	void questionPlacement(Question* q);
+	void showCorrects() const;
+	void showFalses() const;
+	void showUnanswereds() const;
 
 
 	~Quiz();
@@ -192,6 +195,54 @@ void Quiz::questionPlacement(Question* q)
 	{
 		_falses.push_back(q);
 		return;
+	}
+}
+
+void Quiz::showCorrects() const
+{
+	for (auto& question : _corrects)
+	{
+		question->answerIndex = -1;
+
+		cout << *question << endl;
+
+		for (auto& answer: question->answers())
+		{
+			if (answer->isCorrect())
+				cout << "\nCorrect One: " << answer->answer() << endl;;
+		}
+	}
+}
+
+void Quiz::showFalses() const
+{
+	for (auto& question : _falses)
+	{
+		question->answerIndex = -1;
+
+		cout << *question << endl;
+
+		for (auto& answer : question->answers())
+		{
+			if (answer->isCorrect())
+				cout << "\nCorrect One: " << answer->answer() << endl;;
+		}
+	}
+}
+
+void Quiz::showUnanswereds() const
+{
+	for (auto& question : _unanswered)
+	{
+		question->answerIndex = -1;
+
+		cout << *question << endl;
+
+		for (auto& answer : question->answers())
+		{
+			if (answer->isCorrect())
+				cout << "\nCorrect One: " << answer->answer() << endl;;
+		}
 	}
 }
 

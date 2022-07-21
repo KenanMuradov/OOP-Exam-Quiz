@@ -22,6 +22,21 @@ Admin::Admin(string nickname, string password)
 
 #pragma endregion
 
+#pragma region OPERATORS
+
+ostream& operator<<(ostream& out, const Admin& a)
+{
+	out << "Nickname: " << a.nickname() << endl
+		<< "Latest Played Quiz: " << a.latestPlayedQuiz() << endl
+		<< "Highest Score: " << a.highestScore() << endl;
+
+	return out;
+}
+
+
+
+#pragma endregion
+
 
 #pragma region ACCESSORS
 

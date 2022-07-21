@@ -119,9 +119,10 @@ int main()
 	string password;
 	string superSecretKeyword;
 
-	User* currentUser;
+	User* currentUser = nullptr;
 
 	bool isAdmin = true;
+	bool isGuest = true;
 	bool back = false;
 
 	while (!exit)
@@ -152,7 +153,7 @@ int main()
 							cout << "\nEnter your password: ";
 							getline(cin, password);
 
-							if (checkNickname(players, nickname))
+							if (checkNickname(players, admins, nickname))
 							{
 								cout << "\nThis nickname is already used\n";
 								system("pause");
@@ -199,7 +200,7 @@ int main()
 							cout << "\nEnter your password: ";
 							getline(cin, password);
 
-							if (checkNickname(admins, nickname))
+							if (checkNickname(players, admins, nickname))
 							{
 								cout << "\nThis nickname is already used\n";
 								system("pause");
@@ -260,6 +261,9 @@ int main()
 								system("cls");
 								continue;
 							}
+
+							back = true;
+							exit = true;
 							break;
 
 						case 1:
@@ -277,6 +281,7 @@ int main()
 								system("cls");
 								continue;
 							}
+							isAdmin = true;
 
 							back = true;
 							exit = true;
@@ -294,6 +299,7 @@ int main()
 				break;
 
 			case 2:
+				isGuest = true;
 				exit = true;
 				break;
 
@@ -301,8 +307,197 @@ int main()
 				goto start;
 			}
 		}
-
-
 	}
+
+	back = false;
+	exit = false;
+
 #pragma endregion
+
+
+#pragma region MENU
+
+	Quiz* currentQuiz = nullptr;
+	Quiz* tempQuiz = nullptr;
+
+	Commands quizNames;
+	quizNames.commands.push_back("Exit\n");
+
+	Commands adminChoices;
+	adminChoices.commands.push_back("Create Quiz");
+	adminChoices.commands.push_back("Play Quiz");
+	adminChoices.commands.push_back("See all Players Results");
+	adminChoices.commands.push_back("Exit");
+
+	Commands playerChoices;
+	playerChoices.commands.push_back("Play Quiz");
+	playerChoices.commands.push_back("See all Players Results");
+	playerChoices.commands.push_back("Exit");
+
+	Commands guestChoices;
+	guestChoices.commands.push_back("Play Quiz");
+	guestChoices.commands.push_back("Exit");
+
+	Commands afterPlay;
+	afterPlay.commands.push_back("See the score");
+	afterPlay.commands.push_back("See corrects");
+	afterPlay.commands.push_back("See falses");
+	afterPlay.commands.push_back("See unanswered");
+	afterPlay.commands.push_back("Save statistics");
+	afterPlay.commands.push_back("Exit");
+	
+
+
+	if (isAdmin)
+	{
+		system("cls");
+		while (!exit)
+		{
+
+			showQuizChoices(quizNames, quizes);
+
+			setCursorPosition(0, 0);
+			cout << adminChoices;
+			choice = commandCursor(adminChoices);
+
+			if (choice)
+			{
+				switch (adminChoices.commandIndex)
+				{
+				case 0:
+					try
+					{
+						tempQuiz = createQuiz(currentUser->nickname());
+					}
+					catch (const std::exception& ex)
+					{
+						cout << ex.what() << endl;
+						system("pause");
+						system("cls");
+						continue;
+					}
+
+					if (tempQuiz == nullptr)
+						continue;
+					quizes.push_back(new Quiz(*tempQuiz));
+					break;
+
+				case 1:
+					system("cls");
+					while (!back)
+					{
+						if (quizNames.commands.size() == 0)
+						{
+							cout << "There is no quizes. Please wait until one admin creates One for you :)\n";
+							system("pause");
+							system("cls");
+							break;
+						}
+						setCursorPosition(0, 0);
+						cout << quizNames;
+						choice = commandCursor(quizNames);
+						if (choice)
+						{
+							if (quizNames.commandIndex == 0)
+								break;
+						
+							currentQuiz = findQuiz(quizes, quizNames.commands[quizNames.commandIndex]);
+
+							quizShuffle(currentQuiz);
+							currentQuiz = playQuiz(currentQuiz);
+							system("cls");
+							while (!back)
+							{
+								setCursorPosition(0, 0);
+								cout << afterPlay;
+								choice = commandCursor(afterPlay);
+								if (choice)
+								{
+									switch (afterPlay.commandIndex)
+									{
+									case 0:
+										system("cls");
+										cout<<"Your score is: " << findScore(currentQuiz)<<"/100\n";
+										system("pause");
+										break;
+
+									case 1:
+										system("cls");
+										cout << "\n======CORRETS======\n";
+										currentQuiz->showCorrects();
+										system("pause");
+										system("cls");
+										break;
+									case 2:
+										system("cls");
+										cout << "\n======FALSES======\n";
+										currentQuiz->showFalses();
+										system("pause");
+										system("cls");
+										break;
+
+									case 3:
+										system("cls");
+										cout << "\n======UNANSWEREDS======\n";
+										currentQuiz->showUnanswereds();
+										system("pause");
+										system("cls");
+										break;
+
+									case 4:
+										try
+										{
+											dynamic_cast<Admin*>(currentUser)->setLatestPlayedQuiz(currentQuiz->name());
+											dynamic_cast<Admin*>(currentUser)->setHighestScore(findScore(currentQuiz));
+										}
+										catch (const std::exception& ex)
+										{
+											system("cls");
+											cout << ex.what() << endl;
+											system("pause");
+											system("cls");
+											continue;
+										}
+
+										system("cls");
+										cout << "Succesfylly saved";
+										system("pause");
+										system("cls");
+										break;
+
+									case 5:
+										back = true;
+									}
+								}
+							}
+							back = false;
+						}
+					}
+
+					break;
+
+				case 2:
+					system("cls");
+					cout << "=========ALL PLAYERS RESULTS=========";
+					seeAllPlayersResults(admins, players);
+					system("pause");
+					system("cls");
+					break;
+
+				case 3:
+					system("cls");
+					cout << "======GOOD BYE======\n";
+					Sleep(2500);
+					return 0;
+				}
+			}
+			quizNames.commands.clear();
+			quizNames.commands.push_back("Exit\n");
+		}
+	}
+
+	
+
+#pragma endregion
+
 }
