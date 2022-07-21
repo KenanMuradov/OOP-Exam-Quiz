@@ -2,7 +2,7 @@
 class Admin : public User
 {
 	string _latestPlayedQuiz = "";
-	float _highestScore = 0;
+	double _highestScore = 0;
 
 public:
 	Admin() = default;

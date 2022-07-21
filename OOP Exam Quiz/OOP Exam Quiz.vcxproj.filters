@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\Users">
+      <UniqueIdentifier>{cc455035-75bb-46cc-a8c6-dc774f3aed35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Quiz">
+      <UniqueIdentifier>{58dc2797-3c47-4a6c-9769-0eac10d48996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Functions">
+      <UniqueIdentifier>{00d16dc7-be88-4d2b-aa31-c6ea20cc4f07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OOP Exam Quiz.cpp">
@@ -20,34 +29,37 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HelpFunctions.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Answer.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Question.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Quiz.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Commands.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="User.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Файлы заголовков\Users</Filter>
     </ClInclude>
     <ClInclude Include="Admin.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="Quiz.h">
+      <Filter>Файлы заголовков\Quiz</Filter>
+    </ClInclude>
+    <ClInclude Include="Question.h">
+      <Filter>Файлы заголовков\Quiz</Filter>
+    </ClInclude>
+    <ClInclude Include="Answer.h">
+      <Filter>Файлы заголовков\Quiz</Filter>
     </ClInclude>
     <ClInclude Include="Functions.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Functions</Filter>
     </ClInclude>
     <ClInclude Include="FileHandling.h">
+      <Filter>Файлы заголовков\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="HelpFunctions.h">
+      <Filter>Файлы заголовков\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="QuizGame.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

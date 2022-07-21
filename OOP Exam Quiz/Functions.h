@@ -382,6 +382,6 @@ Quiz* playQuiz(Quiz*& quiz)
 			quiz->unanswereds().push_back(question);
 	}
 
-	
+
 	return quiz;
 }
