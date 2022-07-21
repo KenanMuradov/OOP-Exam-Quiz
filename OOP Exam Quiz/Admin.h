@@ -52,15 +52,12 @@ float Admin::highestScore() const
 
 void Admin::setLatestPlayedQuiz(string quizName)
 {
-	if (quizName.size() == 0)
-		throw exception("Quiz name cannot be empty");
-
 	_latestPlayedQuiz = quizName;
 }
 
 void Admin::setHighestScore(float score)
 {
-	if (score > _highestScore)
+	if (score >= _highestScore)
 		_highestScore = score;
 }
 

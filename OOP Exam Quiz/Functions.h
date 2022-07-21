@@ -242,7 +242,7 @@ Quiz* createQuiz(string creatorNick)
 		}
 	}
 
-	if (tempQuiz->questions().size() < 1)
+	if (tempQuiz->questions().size() < 5)
 		throw exception("At least 5 Questions needed");
 
 	return tempQuiz;

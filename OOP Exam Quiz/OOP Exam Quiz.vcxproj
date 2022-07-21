@@ -141,6 +141,11 @@
     <ClInclude Include="Quiz.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Admins.txt" />
+    <Text Include="Players.txt" />
+    <Text Include="Quizes.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

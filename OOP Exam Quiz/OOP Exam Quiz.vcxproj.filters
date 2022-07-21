@@ -51,4 +51,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Admins.txt" />
+    <Text Include="Players.txt" />
+    <Text Include="Quizes.txt" />
+  </ItemGroup>
 </Project>

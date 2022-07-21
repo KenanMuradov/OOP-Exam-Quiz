@@ -128,7 +128,7 @@ vector<Quiz*> loadQuizes(string fileName)
 
 
 
-	if (!stream || !stream.is_open() || stream.peek() != 10)
+	if (!stream || !stream.is_open() || stream.peek() == 10)
 		return quizes;
 
 	size_t quizCount;
@@ -217,7 +217,7 @@ vector<Player*> loadPlayers(string fileName)
 
 	vector<Player*> players;
 
-	if (!stream || !stream.is_open() || stream.peek() != 10)
+	if (!stream || !stream.is_open() || stream.peek() == 10)
 		return players;
 
 	size_t playersCount;
@@ -243,7 +243,7 @@ void savePlayers(string fileName, vector<Player*> players)
 	if (!stream.is_open())
 		throw exception("Cannot open File");
 
-	stream << players.size();
+	stream << players.size() << endl;
 
 	for (auto& player : players)
 		writePlayerToFile(stream, player);
@@ -299,7 +299,7 @@ vector<Admin*> loadAdmins(string fileName)
 
 	vector<Admin*> admins;
 
-	if (!stream || !stream.is_open() || stream.peek() != 10)
+	if (!stream || !stream.is_open() || stream.peek() == 10)
 		return admins;
 
 	size_t playersCount;
@@ -325,7 +325,7 @@ void saveAdmins(string fileName, vector<Admin*> admins)
 	if (!stream.is_open())
 		throw exception("Cannot open File");
 
-	stream << admins.size();
+	stream << admins.size() << endl;
 
 	for (auto& admin : admins)
 		writeAdminToFile(stream, admin);
