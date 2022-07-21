@@ -34,10 +34,6 @@ int main()
 	vector<Admin*> admins = loadAdmins(fileNames[FileNames::Admins]);
 	vector<Player*> players = loadPlayers(fileNames[FileNames::Players]);
 
-	cout << quizes.size() << endl;
-	cout << quizes[0]->name() << endl;
-
-	system("pause");
 
 #pragma endregion
 
@@ -52,7 +48,7 @@ int main()
 	bool exit = false;
 	bool choice;
 
-	//loadScreen();
+	loadScreen();
 	system("cls");
 
 	while (!exit)
