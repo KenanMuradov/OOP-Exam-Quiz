@@ -3,13 +3,6 @@
 bool quizCursor(Quiz& q)
 {
 
-	//  Up key - 224 72
-	//
-	//	Down key - 224 80
-	//
-	//	Left key - 224 75
-	//
-	//	Right key - 224 77
 	vector<Question*> temp = q.questions();
 	short& answerIndex = temp[q.questionIndex]->answerIndex;
 
@@ -75,14 +68,12 @@ bool commandCursor(Commands& c)
 		switch (button)
 		{
 		case 72:
-			setCursorPosition(0, 0);
 			c.commandIndex--;
 			if (c.commandIndex < 0) c.commandIndex = c.commands.size() - 1;
 			break;
 
 
 		case 80:
-			setCursorPosition(0, 0);
 			c.commandIndex++;
 			if (c.commandIndex >= c.commands.size()) c.commandIndex = 0;
 			break;
@@ -100,7 +91,6 @@ bool commandCursor(Commands& c)
 
 	else
 	{
-		setCursorPosition(0, 0);
 		return false;
 	}
 
@@ -118,9 +108,6 @@ Quiz* createQuiz(string creatorNick)
 	getline(cin, name);
 	system("cls");
 
-	if (name == "")
-		throw exception("Quiz name Cannot be empty");
-
 
 	Commands questionCommands;
 	questionCommands.commands.push_back("Add Question");
@@ -137,7 +124,16 @@ Quiz* createQuiz(string creatorNick)
 	TrueOrFalse.commands.push_back("True");
 	TrueOrFalse.commands.push_back("False");
 
-	Quiz* tempQuiz = new Quiz(name, creatorNick);
+	Quiz* tempQuiz;
+	try
+	{
+		tempQuiz = new Quiz(name, creatorNick);
+	}
+	catch (const std::exception& ex)
+	{
+		cout << ex.what() << endl;
+		throw exception(ex);
+	}
 
 	bool choice = false;
 	bool isCorrect = false;
@@ -150,6 +146,8 @@ Quiz* createQuiz(string creatorNick)
 
 	while (!exit)
 	{
+		setCursorPosition(0, 0);
+
 		cout << questionCommands;
 		choice = commandCursor(questionCommands);
 
@@ -162,11 +160,23 @@ Quiz* createQuiz(string creatorNick)
 				cout << "Enter Question Text: ";
 				getline(cin, question);
 
-				tempQuestion = new Question(question);
+				try
+				{
+					tempQuestion = new Question(question);
+
+				}
+				catch (const std::exception& ex) 
+				{
+					cout << ex.what() << endl;
+					system("pause");
+					system("cls");
+					continue;
+				}
+				system("cls");
 
 				while (!exit)
 				{
-					system("cls");
+					setCursorPosition(0, 0);
 					cout << answerCommands;
 					choice = commandCursor(answerCommands);
 
@@ -180,7 +190,7 @@ Quiz* createQuiz(string creatorNick)
 
 							while (true)
 							{
-								system("cls");
+								setCursorPosition(0, 0);
 								cout << "Is Answer True or False?" << endl;
 								cout << TrueOrFalse;
 								choice = commandCursor(TrueOrFalse);
@@ -215,8 +225,8 @@ Quiz* createQuiz(string creatorNick)
 				}
 
 
-
-				tempQuiz->addQuestion(tempQuestion);
+				if (tempQuestion != nullptr)
+					tempQuiz->addQuestion(tempQuestion);
 
 				exit = false;
 				break;
@@ -232,6 +242,9 @@ Quiz* createQuiz(string creatorNick)
 			}
 		}
 	}
+
+	if (tempQuiz->questions().size() < 5)
+		throw exception("At least 5 answers needed");
 
 	return tempQuiz;
 }
@@ -261,4 +274,49 @@ double findScore(Quiz* quiz)
 	finalPoint /= 100.0f;
 
 	return finalPoint;
+}
+
+bool checkNickname(vector<Player*> players, const string& nick)
+{
+	for (auto& player : players)
+	{
+		if (player->nickname() == nick)
+			return true;
+	}
+
+	return false;
+}
+
+bool checkNickname(vector<Admin*> admins, const string& nick)
+{
+	for (auto& admin : admins)
+	{
+		if (admin->nickname() == nick)
+			return true;
+	}
+
+	return false;
+}
+
+
+Player* findPlayer(vector<Player*> players, const string& nick, const string& pass)
+{
+	for (auto& player : players)
+	{
+		if (player->nickname() == nick && player->password() == pass)
+			return player;
+	}
+
+	return nullptr;
+}
+
+Admin* findAdmin(vector<Admin*> admins, const string& nick, const string& pass)
+{
+	for (auto& admin : admins)
+	{
+		if (admin->nickname() == nick && admin->password() == pass)
+			return admin;
+	}
+
+	return nullptr;
 }

@@ -26,7 +26,10 @@ public:
 #pragma region CONSRTUCTOR
 
 User::User(string nickname, string password)
-	: _nickname(nickname), _password(password) {}
+{
+	setNickname(nickname);
+	setPassword(password);
+}
 
 #pragma endregion
 

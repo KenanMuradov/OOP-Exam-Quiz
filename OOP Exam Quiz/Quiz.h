@@ -15,6 +15,8 @@ public:
 
 	Quiz(string name, string creatorNick);
 
+
+
 	string name() const;
 	string creatorNick() const;
 	const vector<Question*>& questions() const;
@@ -36,7 +38,13 @@ public:
 #pragma region CONSTRUCTORS
 
 Quiz::Quiz(string name, string creatorNick)
-	: _name(name), _creatorNick(creatorNick) {}
+{
+	if (name == "" || creatorNick == "")
+		throw exception("Quiz name or Creator nick is incorrect");
+
+	_name = name;
+	_creatorNick = creatorNick;
+}
 
 #pragma endregion
 
