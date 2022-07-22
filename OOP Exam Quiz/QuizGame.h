@@ -67,10 +67,14 @@ namespace HeaderFiles
 		}
 		catch (const std::exception&)
 		{
-
+			
 		}
 
+		//cout << "PLAYERS: " << players.size()<<endl;
+		//cout << "ADMINS: " << admins.size()<<endl;
+		//cout << "QUIZES: " << quizes.size()<<endl;
 
+		//system("pause");
 #pragma endregion
 
 #pragma region START_SCREEN
@@ -188,7 +192,7 @@ namespace HeaderFiles
 								system("cls");
 								cout << "Enter your nick: ";
 								getline(cin, nickname);
-								cout << "\nEnter your password: ";
+								cout << "Enter your password: ";
 								getline(cin, password);
 
 								if (checkNickname(players, admins, nickname))
@@ -235,7 +239,7 @@ namespace HeaderFiles
 								system("cls");
 								cout << "Enter your nick: ";
 								getline(cin, nickname);
-								cout << "\nEnter your password: ";
+								cout << "Enter your password: ";
 								getline(cin, password);
 
 								if (checkNickname(players, admins, nickname))
@@ -696,6 +700,12 @@ namespace HeaderFiles
 #pragma endregion
 
 #pragma region SAVE_PART
+
+		//cout << "PLAYERS: " << players.size() << endl;
+		//cout << "ADMINS: " << admins.size() << endl;
+		//cout << "QUIZES: " << quizes.size() << endl;
+
+		//system("pause");
 
 		saveAdmins(fileNames[FileNames::Admins], admins);
 		savePlayers(fileNames[FileNames::Players], players);

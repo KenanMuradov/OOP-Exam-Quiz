@@ -64,8 +64,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Quizes.txt" />
     <Text Include="Admins.txt" />
     <Text Include="Players.txt" />
-    <Text Include="Quizes.txt" />
   </ItemGroup>
 </Project>

@@ -214,11 +214,12 @@ namespace HeaderFiles
 			getline(stream, latestPlayed);
 
 			stream >> score;
+			stream.ignore();
 
 			Player* p = new Player(name, pass);
 
 			p->setLatestPlayedQuiz(latestPlayed);
-			p->setHighestScore(score);
+			p->setScore(score);
 
 			return p;
 		}
