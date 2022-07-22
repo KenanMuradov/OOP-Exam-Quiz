@@ -55,7 +55,7 @@ void QuizGame()
 	bool exit = false;
 	bool choice;
 
-	loadScreen();
+	//loadScreen();
 	system("cls");
 
 	while (!exit)
@@ -532,7 +532,7 @@ backToSignUP:
 					system("cls");
 					while (!back)
 					{
-						if (quizNames.commands.size() == 0)
+						if (quizes.size() == 0)
 						{
 							cout << "There is no quizes. Please wait until one admin creates One for you :)\n";
 							system("pause");
@@ -642,7 +642,7 @@ backToSignUP:
 					system("cls");
 					while (!back)
 					{
-						if (quizNames.commands.size() == 0)
+						if (quizes.size() == 0)
 						{
 							cout << "There is no quizes. Please wait until one admin creates One for you :)\n";
 							system("pause");
