@@ -7,7 +7,7 @@ namespace HeaderFiles
 		class Player : public User
 		{
 			string _latestPlayedQuiz = "";
-			double _highestScore = 0;
+			double _scoreScore = 0;
 
 		public:
 
@@ -17,7 +17,7 @@ namespace HeaderFiles
 			string latestPlayedQuiz() const;
 			double highestScore() const;
 			void setLatestPlayedQuiz(string quizName);
-			void setHighestScore(float score);
+			void setScore(float score);
 
 		};
 
@@ -38,7 +38,7 @@ namespace HeaderFiles
 
 		double Player::highestScore() const
 		{
-			return _highestScore;
+			return _scoreScore;
 		}
 
 		void Player::setLatestPlayedQuiz(string quizName)
@@ -46,10 +46,15 @@ namespace HeaderFiles
 			_latestPlayedQuiz = quizName;
 		}
 
-		void Player::setHighestScore(float score)
+		void Player::setScore(float score)
 		{
-			if (score > _highestScore)
-				_highestScore = score;
+			if (score > 0)
+			{
+				_scoreScore = score;
+				return;
+			}
+
+			_scoreScore = 0;
 		}
 
 #pragma endregion

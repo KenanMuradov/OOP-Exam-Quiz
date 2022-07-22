@@ -6,7 +6,6 @@ using namespace std;
 
 int main()
 {
-	cout << "TEST VARIANT";
 	HeaderFiles::QuizGame();
 	return 0;
 }

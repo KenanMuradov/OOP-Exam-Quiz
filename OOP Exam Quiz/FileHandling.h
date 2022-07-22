@@ -192,7 +192,6 @@ namespace HeaderFiles
 				<< p->password() << endl
 				<< p->latestPlayedQuiz() << endl
 				<< p->highestScore() << endl;
-			stream.ignore();
 
 		}
 
@@ -260,6 +259,9 @@ namespace HeaderFiles
 
 			if (!stream.is_open())
 				throw exception("Cannot open File");
+
+			stream.seekg(0);
+
 
 			stream << players.size() << endl;
 
@@ -339,6 +341,9 @@ namespace HeaderFiles
 
 			if (!stream.is_open())
 				throw exception("Cannot open File");
+
+			stream.seekg(0);
+
 
 			stream << admins.size() << endl;
 

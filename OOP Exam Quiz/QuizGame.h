@@ -19,6 +19,8 @@ using namespace std;
 #include "Functions.h"
 #include "FileHandling.h"
 
+// Admin oynaya bilmir cunki cavablari bilir deye cheat edib score yiga biler odur ki ancaq quiz yaradib leaderBoard a baxa biler
+
 namespace HeaderFiles
 {
 
@@ -82,7 +84,7 @@ namespace HeaderFiles
 		bool exit = false;
 		bool choice;
 
-		//loadScreen();
+		loadScreen();
 		system("cls");
 
 		while (!exit)
@@ -637,7 +639,7 @@ namespace HeaderFiles
 											try
 											{
 												dynamic_cast<Player*>(currentUser)->setLatestPlayedQuiz(currentQuiz->name());
-												dynamic_cast<Player*>(currentUser)->setHighestScore(findScore(currentQuiz) + dynamic_cast<Player*>(currentUser)->highestScore());
+												dynamic_cast<Player*>(currentUser)->setScore(findScore(currentQuiz) + dynamic_cast<Player*>(currentUser)->highestScore());
 											}
 											catch (const std::exception& ex)
 											{
