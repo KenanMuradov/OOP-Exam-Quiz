@@ -12,30 +12,30 @@ KepaMax
 0
 10 - 9?
 4
+1
+1
+5
+0
 2
 0
-1
-1
 12
-0
-5
 0
 5 * 6?
 4
-30
-1
-24
-0
 100
 0
+30
+1
 42
+0
+24
 0
 5 - 2?
 3
-3
-1
 7
 0
+3
+1
 2
 0
 29 - 13?
@@ -61,26 +61,26 @@ What is Europe's largest port?
 4
 Port of Hamburg
 0
+Port of Antwerp
+0
 Port of Rotterdam
 1
 Port of Valencia
-0
-Port of Antwerp
 0
 A sabra is a native of which country?
 3
 Scotland
 0
-Switzerland
-1
 Denmark
 0
+Switzerland
+1
 Which country's name could be part of a Christmas dinner?
 3
-Turkey
-1
 Canada
 0
+Turkey
+1
 Norway
 0
 In which continent is the world's longest river, the Nile?
@@ -89,7 +89,7 @@ Africa
 1
 Europe
 0
-Asia
-0
 America
+0
+Asia
 0
