@@ -200,13 +200,31 @@ Quiz* createQuiz(string creatorNick)
 							switch (TrueOrFalse.commandIndex)
 							{
 							case 0:
-
-								tempQuestion->addAnswer(new Answer(answer, 1));
-								break;
+								try
+								{
+									tempQuestion->addAnswer(new Answer(answer, 1));
+									break;
+								}
+								catch (const std::exception& ex)
+								{
+									cout << ex.what() << endl;
+									continue;
+								}
+								
 
 							case 1:
-								tempQuestion->addAnswer(new Answer(answer, 0));
-								break;
+								
+								try
+								{
+									tempQuestion->addAnswer(new Answer(answer, 0));
+									break;
+								}
+								catch (const std::exception& ex)
+								{
+									cout << ex.what() << endl;
+									continue;
+								}
+
 							}
 
 							break;
@@ -320,18 +338,22 @@ void seeAllPlayersResults(vector<Admin*> admins, vector<Player*> players)
 {
 	for (auto& admin : admins)
 	{
-		cout << "\n---------------\n";
-		cout << *admin << endl;
-		cout << "---------------\n";
-
+		if (admin->latestPlayedQuiz() != "")
+		{
+			cout << "\n---------------\n";
+			cout << *admin << endl;
+			cout << "---------------\n";
+		}
 	}
 
 	for (auto& player : players)
 	{
-		cout << "\n---------------\n";
-		cout << *player << endl;
-		cout << "---------------\n";
-
+		if (player->latestPlayedQuiz() != "")
+		{
+			cout << "\n---------------\n";
+			cout << *player << endl;
+			cout << "---------------\n";
+		}
 	}
 }
 

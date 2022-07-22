@@ -10,7 +10,7 @@ public:
 	Player(string nickname, string password);
 
 	string latestPlayedQuiz() const;
-	float highestScore() const;
+	double highestScore() const;
 	void setLatestPlayedQuiz(string quizName);
 	void setHighestScore(float score);
 
@@ -31,16 +31,13 @@ string Player::latestPlayedQuiz() const
 	return _latestPlayedQuiz;
 }
 
-float Player::highestScore() const
+double Player::highestScore() const
 {
 	return _highestScore;
 }
 
 void Player::setLatestPlayedQuiz(string quizName)
 {
-	if (quizName.size() == 0)
-		throw exception("Quiz name cannot be empty");
-
 	_latestPlayedQuiz = quizName;
 }
 

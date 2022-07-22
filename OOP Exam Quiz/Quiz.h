@@ -209,7 +209,7 @@ void Quiz::showCorrects() const
 		for (auto& answer: question->answers())
 		{
 			if (answer->isCorrect())
-				cout << "\nCorrect One: " << answer->answer() << endl;;
+				cout << "Correct One: " << answer->answer() << endl<<endl;;
 		}
 	}
 }
@@ -225,7 +225,7 @@ void Quiz::showFalses() const
 		for (auto& answer : question->answers())
 		{
 			if (answer->isCorrect())
-				cout << "\nCorrect One: " << answer->answer() << endl;;
+				cout << "Correct One: " << answer->answer() << endl << endl;
 		}
 	}
 }
@@ -241,7 +241,7 @@ void Quiz::showUnanswereds() const
 		for (auto& answer : question->answers())
 		{
 			if (answer->isCorrect())
-				cout << "\nCorrect One: " << answer->answer() << endl;;
+				cout << "Correct One: " << answer->answer() << endl << endl;
 		}
 	}
 }

@@ -1,18 +1,45 @@
 #pragma once
 void QuizGame()
 {
-
-
-
 	string adminSecretPass = "Dattebayo";
+
 #pragma region LOAD_FILES
 
 	enum FileNames { Quizes, Admins, Players };
 	vector<string> fileNames = { "Quizes.txt","Admins.txt","Players.txt" };
 
-	vector<Quiz*> quizes = loadQuizes(fileNames[FileNames::Quizes]);
-	vector<Admin*> admins = loadAdmins(fileNames[FileNames::Admins]);
-	vector<Player*> players = loadPlayers(fileNames[FileNames::Players]);
+	vector<Quiz*> quizes;
+	vector<Admin*> admins;
+	vector<Player*> players;
+
+	try
+	{
+		quizes = loadQuizes(fileNames[FileNames::Quizes]);
+	}
+	catch (const std::exception& ex)
+	{
+
+	}
+
+	try
+	{
+		admins = loadAdmins(fileNames[FileNames::Admins]);
+	}
+
+	catch (const std::exception&)
+	{
+
+	}
+
+	try
+	{
+		players = loadPlayers(fileNames[FileNames::Players]);
+
+	}
+	catch (const std::exception&)
+	{
+
+	}
 
 
 #pragma endregion
@@ -98,6 +125,7 @@ void QuizGame()
 	string nickname;
 	string password;
 	string superSecretKeyword;
+backToSignUP:
 
 	User* currentUser = nullptr;
 
@@ -107,6 +135,7 @@ void QuizGame()
 
 	while (!exit)
 	{
+
 		setCursorPosition(0, 0);
 		cout << start;
 		choice = commandCursor(start);
@@ -308,15 +337,18 @@ void QuizGame()
 	adminChoices.commands.push_back("Create Quiz");
 	adminChoices.commands.push_back("Play Quiz");
 	adminChoices.commands.push_back("See all Players Results");
+	adminChoices.commands.push_back("Back to sign up screen");
 	adminChoices.commands.push_back("Exit");
 
 	Commands playerChoices;
 	playerChoices.commands.push_back("Play Quiz");
 	playerChoices.commands.push_back("See all Players Results");
+	playerChoices.commands.push_back("Back to sign up screen");
 	playerChoices.commands.push_back("Exit");
 
 	Commands guestChoices;
 	guestChoices.commands.push_back("Play Quiz");
+	guestChoices.commands.push_back("Back to sign up screen");
 	guestChoices.commands.push_back("Exit");
 
 	Commands afterPlay;
@@ -400,6 +432,7 @@ void QuizGame()
 										system("cls");
 										cout << "Your score is: " << findScore(currentQuiz) << "/100\n";
 										system("pause");
+										system("cls");
 										break;
 
 									case 1:
@@ -467,6 +500,10 @@ void QuizGame()
 
 				case 3:
 					system("cls");
+					goto backToSignUP;
+
+				case 4:
+					system("cls");
 					cout << "======GOOD BYE======\n";
 					Sleep(2500);
 					exit = true;
@@ -482,6 +519,8 @@ void QuizGame()
 		system("cls");
 		while (!exit)
 		{
+			showQuizChoices(quizNames, quizes);
+
 			setCursorPosition(0, 0);
 			cout << guestChoices;
 			choice = commandCursor(guestChoices);
@@ -553,7 +592,7 @@ void QuizGame()
 
 									case 4:
 										system("cls");
-										cout << "You need to sign up for saving your progress";
+										cout << "You need to sign up for saving your progress\n";
 										system("pause");
 										system("cls");
 										break;
@@ -569,6 +608,10 @@ void QuizGame()
 					break;
 
 				case 1:
+					system("cls");
+					goto backToSignUP;
+
+				case 2:
 					system("cls");
 					cout << "======GOOD BYE======\n";
 					Sleep(2500);
@@ -586,6 +629,8 @@ void QuizGame()
 		system("cls");
 		while (!exit)
 		{
+			showQuizChoices(quizNames, quizes);
+
 			setCursorPosition(0, 0);
 			cout << playerChoices;
 			choice = commandCursor(playerChoices);
@@ -630,6 +675,7 @@ void QuizGame()
 										system("cls");
 										cout << "Your score is: " << findScore(currentQuiz) << "/100\n";
 										system("pause");
+										system("cls");
 										break;
 
 									case 1:
@@ -671,7 +717,7 @@ void QuizGame()
 										}
 
 										system("cls");
-										cout << "Succesfylly saved";
+										cout << "Succesfylly saved\n";
 										system("pause");
 										system("cls");
 										break;
@@ -696,6 +742,12 @@ void QuizGame()
 					break;
 
 				case 2:
+					system("cls");
+
+					goto backToSignUP;
+
+
+				case 3:
 					system("cls");
 					cout << "======GOOD BYE======\n";
 					Sleep(2500);

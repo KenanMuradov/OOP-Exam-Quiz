@@ -1,4 +1,4 @@
-1
+2
 Simple Math Quiz
 KepaMax
 5
@@ -46,3 +46,50 @@ KepaMax
 0
 16
 1
+Simple Geography Quiz
+KepaMax
+5
+ Which river flows through Paris?
+3
+River Kur
+0
+River Don
+0
+River Seine
+1
+What is Europe's largest port?
+4
+Port of Hamburg
+0
+Port of Rotterdam
+1
+Port of Valencia
+0
+Port of Antwerp
+0
+A sabra is a native of which country?
+3
+Scotland
+0
+Switzerland
+1
+Denmark
+0
+Which country's name could be part of a Christmas dinner?
+3
+Turkey
+1
+Canada
+0
+Norway
+0
+In which continent is the world's longest river, the Nile?
+4
+Africa
+1
+Europe
+0
+Asia
+0
+America
+0

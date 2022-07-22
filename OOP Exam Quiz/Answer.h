@@ -34,7 +34,7 @@ Answer::Answer(string answer, bool isCorrect)
 
 ostream& operator<<(ostream& out, const Answer& a)
 {
-	return out << a.answer() << ' ' << a.isCorrect();
+	return out << a.answer();
 }
 
 #pragma endregion

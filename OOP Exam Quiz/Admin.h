@@ -9,7 +9,7 @@ public:
 	Admin(string nickname, string password);
 
 	string latestPlayedQuiz() const;
-	float highestScore() const;
+	double highestScore() const;
 	void setLatestPlayedQuiz(string quizName);
 	void setHighestScore(float score);
 
@@ -45,7 +45,7 @@ string Admin::latestPlayedQuiz() const
 	return _latestPlayedQuiz;
 }
 
-float Admin::highestScore() const
+double Admin::highestScore() const
 {
 	return _highestScore;
 }

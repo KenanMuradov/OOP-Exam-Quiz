@@ -127,9 +127,10 @@ vector<Quiz*> loadQuizes(string fileName)
 	vector<Quiz*> quizes;
 
 
-
-	if (!stream || !stream.is_open() || stream.peek() == 10)
+	if (!stream || !stream.is_open())
 		return quizes;
+
+	stream.seekg(0);
 
 	size_t quizCount;
 
@@ -138,6 +139,8 @@ vector<Quiz*> loadQuizes(string fileName)
 
 	for (size_t i = 0; i < quizCount; i++)
 		quizes.push_back(readQuizFromFile(stream));
+
+	stream.close();
 
 	return quizes;
 }
@@ -161,6 +164,9 @@ void saveQuizes(string fileName, vector<Quiz*>& quizes)
 
 	for (auto& quiz : quizes)
 		writeQuizToFile(stream, quiz);
+
+	stream.close();
+
 }
 
 #pragma endregion
@@ -217,8 +223,10 @@ vector<Player*> loadPlayers(string fileName)
 
 	vector<Player*> players;
 
-	if (!stream || !stream.is_open() || stream.peek() == 10)
+	if (!stream || !stream.is_open())
 		return players;
+
+	stream.seekg(0);
 
 	size_t playersCount;
 
@@ -227,6 +235,9 @@ vector<Player*> loadPlayers(string fileName)
 
 	for (size_t i = 0; i < playersCount; i++)
 		players.push_back(readPlayerFromFile(stream));
+
+	stream.close();
+
 
 	return players;
 }
@@ -247,6 +258,9 @@ void savePlayers(string fileName, vector<Player*> players)
 
 	for (auto& player : players)
 		writePlayerToFile(stream, player);
+
+	stream.close();
+
 }
 
 void writeAdminToFile(fstream& stream, Admin* a)
@@ -299,8 +313,11 @@ vector<Admin*> loadAdmins(string fileName)
 
 	vector<Admin*> admins;
 
-	if (!stream || !stream.is_open() || stream.peek() == 10)
+	if (!stream || !stream.is_open())
 		return admins;
+
+	stream.seekg(0);
+
 
 	size_t playersCount;
 
@@ -310,6 +327,8 @@ vector<Admin*> loadAdmins(string fileName)
 	for (size_t i = 0; i < playersCount; i++)
 		admins.push_back(readAdminFromFile(stream));
 
+
+	stream.close();
 	return admins;
 }
 
@@ -329,6 +348,9 @@ void saveAdmins(string fileName, vector<Admin*> admins)
 
 	for (auto& admin : admins)
 		writeAdminToFile(stream, admin);
+
+	stream.close();
+
 }
 
 
